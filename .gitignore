@@ -3,4 +3,4 @@
 .env
 **.pytest_cache
 .vscode
-/migrations
+#/migrations
