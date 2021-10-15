@@ -12,6 +12,6 @@ def create_app():
     migration.init_app(app)
     jwt.init_app(app)
 
-    app.register_blueprint(routes.bp)
+    routes.init_app(app)
     
     return app
