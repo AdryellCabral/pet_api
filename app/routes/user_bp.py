@@ -1,7 +1,7 @@
 from flask import Blueprint
+from app.controllers.user_controller import cadastrar_user, get_users
 
 bp_user = Blueprint("user", __name__)
 
-@bp_user.get("/")
-def first_route():
-    return {"msg": "Hello world!"}, 200
+bp_user.post("/signup")(cadastrar_user)
+bp_user.get("/users")(get_users)
