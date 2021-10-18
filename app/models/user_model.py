@@ -4,6 +4,7 @@ from sqlalchemy.sql.sqltypes import DateTime
 from app.configs.database import db
 from dataclasses import dataclass
 from sqlalchemy import Column, String, Integer, ForeignKey, DateTime, Boolean
+from werkzeug.security import generate_password_hash, check_password_hash
 
 @dataclass
 class User(db.Model):
@@ -26,4 +27,17 @@ class User(db.Model):
     user_phone = Column(String, nullable=False)
     created_at = Column(DateTime, nullable=False)
     last_modified = Column(DateTime, nullable=True)
+    password_hash = Column(String(511), nullable=False)
     #pet_id = Column(Integer, ForeignKey("pet.id"), nullable=False, unique=True)
+
+    @property
+    def password(self):
+        raise AssertionError('Password is not accessible.')
+
+    @password.setter
+    def password(self, password_to_hash):
+        self.password_hash = generate_password_hash(password_to_hash)
+
+    def check_password(self, password_to_compare):
+        is_valid_password = check_password_hash(self.password_hash, password_to_compare)
+        return is_valid_password
