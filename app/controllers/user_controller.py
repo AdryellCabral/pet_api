@@ -22,11 +22,11 @@ def cadastrar_user():
     db.session.commit()
 
     return jsonify(user), 201
-    
+
 
 def get_users():
     users = User.query.all()
 
-    return {"data": 
+    return {"data":
         [serializer(user) for user in users]
     }, 200
