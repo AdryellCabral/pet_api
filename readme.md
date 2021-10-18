@@ -61,6 +61,18 @@ Base URL: `url do heroku aqui`
 
      http://localhost:5000/signup
 
+JSON model
+
+    {
+        "user_name": "User 01",
+        "user_birthdate": "1999/08/15",
+        "user_cpf": "01234567890",
+        "user_city": "Belzonte",
+        "user_phone": "31901234567",
+        "password": "examplepassword"
+    }
+    
+
 ### Response
 
     {
