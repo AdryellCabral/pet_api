@@ -20,6 +20,6 @@ class PetModel(db.Model):
     pet_birthdate = Column(DateTime, nullable=False)
     pet_description = Column(String(155), nullable=False, unique=True)
     pet_localization = Column(String(60), nullable=False)
-    created_at = Column(DateTime, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.today())
     # type_id = Column(Integer, ForeignKey("type.id"), nullable=False,
     #                  unique=True)

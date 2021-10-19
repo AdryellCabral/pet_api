@@ -57,8 +57,11 @@ def patch_data():
         data = request.get_json()
 
         query = PetModel.query.filter_by(pet_name=data['pet_name']).one()
-        PetModel(query)
 
+        for key, value in data.items():
+            setattr(query, key, value)
+
+        session.add(query)
         session.commit()
 
         return '', 204
