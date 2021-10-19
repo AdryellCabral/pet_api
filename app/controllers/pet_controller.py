@@ -44,8 +44,7 @@ def get_all():
 def delete_data():
     try:
         data = request.get_json()
-        query = PetModel.query.filter_by(
-                                        pet_name=data['pet_name']).one()
+        query = PetModel.query.filter_by(id=data['id']).one()
 
         session = current_app.db.session
         session.delete(query)
@@ -75,3 +74,21 @@ def patch_data():
         return {'message': 'Invalid'}, 404
     except AttributeError:
         return {'message': 'No data found.'}, 404
+
+
+@jwt_required()
+def filter_by_city():
+    try:
+        session = current_app.db.session
+        data = request.get_json()
+
+        query = PetModel.query.filter_by(pet_localization=data['pet_localization']).one()
+
+        result = jsonify(query)
+
+        return result
+    
+    except NoDataFound:
+
+        return {'message': 'No data found.'}, 404
+        
