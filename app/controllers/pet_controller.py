@@ -2,7 +2,10 @@ from flask import current_app, jsonify, request
 from app.models.pet_model import PetModel
 from app.exc.exc_pet import NoDataFound
 
+from flask_jwt_extended import jwt_required
 
+
+@jwt_required()
 def post_pet():
 
     session = current_app.db.session
@@ -24,6 +27,7 @@ def post_pet():
     }, 201
 
 
+@jwt_required()
 def get_all():
     try:
         data = PetModel.query.all()
@@ -36,6 +40,7 @@ def get_all():
         return jsonify({"message": "No data found."}), 400
 
 
+@jwt_required()
 def delete_data():
     try:
         data = request.get_json()
@@ -51,6 +56,7 @@ def delete_data():
         return {'message': 'Invalid key'}, 404
 
 
+@jwt_required()
 def patch_data():
     try:
         session = current_app.db.session
