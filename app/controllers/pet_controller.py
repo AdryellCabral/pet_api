@@ -49,3 +49,20 @@ def delete_data():
         return jsonify(query), 204
     except KeyError:
         return {'message': 'Invalid key'}, 404
+
+
+def patch_data():
+    try:
+        session = current_app.db.session
+        data = request.get_json()
+
+        query = PetModel.query.filter_by(pet_name=data['pet_name']).one()
+        PetModel(query)
+
+        session.commit()
+
+        return '', 204
+    except KeyError:
+        return {'message': 'Invalid'}, 404
+    except AttributeError:
+        return {'message': 'No data found.'}, 404
