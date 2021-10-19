@@ -7,8 +7,8 @@ from sqlalchemy import Column, String, Integer
 @dataclass
 class Type(db.Model):
     id: int
-    pet_type: str 
-    pet_race: str 
+    pet_type: str
+    pet_race: str
     pet_size: str
 
     __tablename__ = "type"
