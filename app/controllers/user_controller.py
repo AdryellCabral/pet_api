@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, current_app
 from datetime import datetime
 
 import sqlalchemy
@@ -54,3 +54,40 @@ def login_user():
         return {"msg": "Bad username or password."}, 401
     except AttributeError:
         return {"msg": "User with this cpf not found!"}, 404
+
+
+@jwt_required()
+def delete_user():
+    try:
+        data = request.get_json()
+        user = User.query.filter_by(id=data['id']).one()
+
+        session = current_app.db.session
+        session.delete(user)
+        session.commit()
+
+        return jsonify(user), 204
+    except KeyError:
+        return {'message': 'Invalid key'}, 404
+
+
+@jwt_required()
+def update_user():
+    try:
+        session = current_app.db.session
+        data = request.get_json()
+
+        user = User.query.filter_by(id=data['id']).one()
+
+        for key, value in data.items():
+            setattr(user, key, value)
+
+        session.add(user)
+        session.commit()
+
+        return '', 204
+        
+    except KeyError:
+        return {'message': 'Invalid'}, 404
+    except AttributeError:
+        return {'message': 'No data found.'}, 404
