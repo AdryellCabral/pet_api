@@ -341,7 +341,7 @@ JSON model
         }
     }
 
-## 2.3 - Delete pet
+## 3.3 - Delete adoption
 
 ### Request
 
@@ -359,7 +359,7 @@ JSON model
 
      No body returned for response
 
-## 2.4 - Update pet
+## 3.4 - Update adoption
 
 ### Request
 
@@ -380,7 +380,7 @@ JSON model
 
      no body returned for response
 
-## 3.5 - Select pet
+## 3.5 - Select adoption
 
 ### Request
 
