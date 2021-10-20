@@ -36,9 +36,9 @@ Base URL: `url do heroku aqui`
 
 ### Request
 
-`GET /users`
+`GET /api/users`
 
-    http://localhost:5000/users
+    http://localhost:5000/api/users
 
 ### Response
 
@@ -61,9 +61,9 @@ Base URL: `url do heroku aqui`
 
 ### Request
 
-`POST users/signup`
+`POST /api/users/signup`
 
-http://localhost:5000/users/signup
+    http://localhost:5000/api/users/signup
 
 JSON model
 
@@ -92,14 +92,16 @@ JSON model
 
 ### Request
 
-`POST /users/login`
+`POST /api/users/login`
 
-    http://localhost:5000/users/login
+    http://127.0.0.1:5000/api/users/login
 
-     {
-         "user_cpf": "01234567890",
-         "password": "examplepassword"
-     }
+JSON model
+
+    {
+        "user_cpf": "01234567890",
+        "password": "examplepassword"
+    }
 
 ### Response
 
@@ -113,7 +115,9 @@ JSON model
 
 `DELETE /users`
 
-    http://localhost:5000/users
+    http://localhost:5000/api/users
+
+JSON model
 
     {
         "id": 1
@@ -121,7 +125,7 @@ JSON model
 
 ### Response
 
-     no body returned for response
+     No body returned for response
 
 ## 1.5 - update user
 
@@ -129,7 +133,9 @@ JSON model
 
 `UPDATE /users`
 
-    http://localhost:5000/users
+    http://localhost:5000/api/users
+
+JSON model
 
     {
         "id": 1
@@ -139,15 +145,18 @@ JSON model
 
      no body returned for response
 
+<br>
+<br>
+
 # 2 - PETS
 
 ## 2.1 - Get list of Pets
 
 ### Request
 
-`GET /pets/list`
+`GET /api/pets`
 
-    http://localhost:5000/pet/list
+    http://localhost:5000/api/pets
 
 ### Response
 
@@ -164,16 +173,15 @@ JSON model
             "contact_phone": "(00)99999-9999"
             }
         ]
-
-}
+    }
 
 ## 2.2 - Create a new pet
 
 ### Request
 
-`POST /pet/list`
+`POST /api/pets`
 
-    http://localhost:5000/pet/list
+    http://localhost:5000/api/pets
 
 ### JSON model
 
@@ -206,9 +214,9 @@ JSON model
 
 ### Request
 
-`DELETE /pet/list`
+`DELETE /api/pets`
 
-    http://localhost:5000/pet/list
+    http://localhost:5000/api/pets
 
 ### JSON model
 
@@ -224,11 +232,11 @@ JSON model
 
 ### Request
 
-`UPDATE /pet/list`
+`PATCH /api/pets`
 
 ### It is necessary to use the "id" to update the other data that are optional.
 
-    http://localhost:5000/pet/list
+    http://localhost:5000/api/pets
 
 ### JSON model
 
@@ -251,14 +259,14 @@ JSON model
 
 ### Request
 
-`POST /pet/list/select-pet`
+`POST /api/petsselect-pet`
 
-    http://localhost:5000/pet/list/select-pet
+    http://localhost:5000/api/pets/select-pet
 
 ### JSON model
 
     {
-        "id": 1,
+        "id": 1
     }
 
 ### Response
@@ -274,8 +282,10 @@ JSON model
             "pet_localization": "Rio de Janeiro - RJ",
             "contact_phone": "(00)12345-6666"
         }
+    }
 
-}
+<br>
+<br>
 
 # 3 - PETS ADOPTED
 
@@ -283,43 +293,53 @@ JSON model
 
 ### Request
 
-`GET /pets`
+`GET /api/adoptions`
 
-    http://localhost:5000/pet
+    http://localhost:5000/api/adoptions
 
 ### Response
 
     {
-      "data": [
-        {
-            "id": 2,
-            "pet_name": "king",
-            "pet_info": {
-            "id": 5,
-            "pet_type": "cat",
-            "pet_race": "undefined race",
-            "pet_size": "Small",
-            "pet_birthdate": "Thu, 11 Oct 2001 00:00:00 GMT",
-            "pet_description": "Text with the description",
-            "pet_localization": "Rio de Janeiro - RJ",
-            "contact_phone": "(00)12345-6666"
-        }
-      ]
+        "data": [
+            {
+                "id": 1,
+                "pet_name": "Sansão",
+                "pet_info": {
+                    "id": 1,
+                    "pet_type": "Dogs",
+                    "pet_race": "Buldogue",
+                    "pet_size": "Small",
+                    "pet_birthdate": "Thu, 11 Oct 2001 00:00:00 GMT",
+                    "pet_description": "Text with the description",
+                    "pet_localization": "Rio de Janeiro - RJ",
+                    "contact_phone": "(00)99999-9999"
+                },
+                "owner_info": {
+                    "id": 1,
+                    "user_name": "User 01",
+                    "user_birthdate": "Sun, 15 Aug 1999 00:00:00 GMT",
+                    "user_phone": "31901234567",
+                    "user_city": "Belzonte",
+                    "created_at": "Wed, 20 Oct 2021 17:43:33 GMT"
+                }
+            }
+        ]
     }
 
 ## 3.2 - Create a new adoption
 
 ### Request
 
-`POST /pet`
+`POST /api/adoptions`
 
-    http://localhost:5000/pet
+    http://localhost:5000/api/adoptions
 
 ### JSON model
 
     {
         "pet_name": "Sansão",
-        "pet_id": 1
+        "pet_id": 1,
+        "owner_id": 1
     }
 
 ### Response
@@ -329,14 +349,22 @@ JSON model
             "id": 1,
             "pet_name": "Sansão",
             "pet_info": {
-            "id": 1,
-            "pet_type": "cat",
-            "pet_race": "undefined race",
-            "pet_size": "Small",
-            "pet_birthdate": "Thu, 11 Oct 2001 00:00:00 GMT",
-            "pet_description": "Text with the description",
-            "pet_localization": "Rio de Janeiro - RJ",
-            "contact_phone": "(00)12345-6666"
+                "id": 1,
+                "pet_type": "Dogs",
+                "pet_race": "Buldogue",
+                "pet_size": "Small",
+                "pet_birthdate": "Thu, 11 Oct 2001 00:00:00 GMT",
+                "pet_description": "Text with the description",
+                "pet_localization": "Rio de Janeiro - RJ",
+                "contact_phone": "(00)99999-9999"
+            },
+            "owner_info": {
+                "id": 1,
+                "user_name": "User 01",
+                "user_birthdate": "Sun, 15 Aug 1999 00:00:00 GMT",
+                "user_phone": "31901234567",
+                "user_city": "Belzonte",
+                "created_at": "Wed, 20 Oct 2021 17:50:38 GMT"
             }
         }
     }
@@ -345,9 +373,9 @@ JSON model
 
 ### Request
 
-`DELETE /pet`
+`DELETE /api/adoptions`
 
-    http://localhost:5000/pet
+    http://localhost:5000/api/adoptions
 
 ### JSON model
 
@@ -363,17 +391,15 @@ JSON model
 
 ### Request
 
-`UPDATE /pet`
+`UPDATE /api/adoptions`
 
-### It is necessary to use the "id" to update the other data that are optional.
-
-    http://localhost:5000/pet
+    http://localhost:5000/api/adoptions
 
 ### JSON model
 
     {
         "id": 1,
-        "pet_name": "Caramelo",
+        "pet_name": "Caramelo"
     }
 
 ### Response
@@ -386,12 +412,12 @@ JSON model
 
 `POST /pet/list/select`
 
-    http://localhost:5000/pet/list/select
+    http://localhost:5000/api/adoptions/select-id
 
 ### JSON model
 
     {
-        "id": 1,
+        "id": 1
     }
 
 ### Response
@@ -401,14 +427,22 @@ JSON model
             "id": 1,
             "pet_name": "Caramelo",
             "pet_info": {
-            "id": 1,
-            "pet_type": "cat",
-            "pet_race": "undefined race",
-            "pet_size": "Small",
-            "pet_birthdate": "Thu, 11 Oct 2001 00:00:00 GMT",
-            "pet_description": "Text with the description",
-            "pet_localization": "Rio de Janeiro - RJ",
-            "contact_phone": "(00)12345-6666"
+                "id": 1,
+                "pet_type": "Dogs",
+                "pet_race": "Buldogue",
+                "pet_size": "Small",
+                "pet_birthdate": "Thu, 11 Oct 2001 00:00:00 GMT",
+                "pet_description": "Text with the description",
+                "pet_localization": "Rio de Janeiro - RJ",
+                "contact_phone": "(00)99999-9999"
+            },
+            "owner_info": {
+                "id": 1,
+                "user_name": "User 01",
+                "user_birthdate": "Sun, 15 Aug 1999 00:00:00 GMT",
+                "user_phone": "31901234567",
+                "user_city": "Belzonte",
+                "created_at": "Wed, 20 Oct 2021 17:50:38 GMT"
             }
         }
     }
