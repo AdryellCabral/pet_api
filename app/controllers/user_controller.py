@@ -1,25 +1,13 @@
 from flask import request, jsonify, current_app
-from datetime import datetime
-
 import sqlalchemy
 from app.models.user_model import User
 from app.configs.database import db
 from flask_jwt_extended import create_access_token, jwt_required
 
 
-def serializer(obj):
-    return {
-        "name": obj.user_name,
-        "id": obj.id,
-        "birthdate": obj.user_birthdate
-    }
-
-
 def cadastrar_user():
     try:
         data = request.json
-
-        data["created_at"] = datetime.now()
 
         user = User(**data)
 
@@ -31,14 +19,9 @@ def cadastrar_user():
         return {"msg": "Check the user data and try again. Read the documentation for more information."}, 400
     
 def get_users():
-
-    #TODO: Melhorar a forma de serializar esses dados, o jsonify nao funciona
-
     users = User.query.all()
 
-    return {"data":
-        [serializer(user) for user in users]
-    }, 200
+    return jsonify(users), 200
 
 
 def login_user():
