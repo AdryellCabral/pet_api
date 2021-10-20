@@ -28,7 +28,9 @@ The REST API to the app is described below.
 ##
 Base URL: `url do heroku aqui`
 
-## Get list of Users
+# 1 - USER
+
+## 1.1 - Get list of Users
 
 ### Request
 
@@ -53,13 +55,13 @@ Base URL: `url do heroku aqui`
         ]
     }
 
-## Create a new User
+## 1.2 - Create a new User
 
 ### Request
 
-`POST /signup`
+`POST users/signup`
 
-     http://localhost:5000/signup
+http://localhost:5000/users/signup
 
 JSON model
 
@@ -76,23 +78,27 @@ JSON model
 ### Response
 
     {
-        "id": 17,
-        "user_birthdate": "Sun, 15 Aug 1999 00:00:00 GMT",
-        "user_city": "Betim",
+        "id": 1,
         "user_name": "User 01",
-        "user_phone": "00000000000"
+        "user_birthdate": "Sun, 15 Aug 1999 00:00:00 GMT",
+        "user_phone": "31901234567",
+        "user_city": "Belzonte",
+        "is_owner": true,
+        "created_at": "Wed, 20 Oct 2021 07:44:07 GMT"
     }
 
 
-## Login
+## 1.3 - Login user
 
 ### Request
 
-`POST /login`
+`POST /users/login`
+
+    http://localhost:5000/users/login
 
      {
          "user_cpf": "01234567890",
-         "password": "passwordexample"
+         "password": "examplepassword"
      }
 
 ### Response
@@ -100,3 +106,37 @@ JSON model
      {
          "access_token":            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.  eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzNDU2NzUwNSwianRpIjoiZDFkNWUzMzctMzU1MC00OGJhLWEzMjEtMDMwZDEwN2Y3YzgyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJpZCI6MTQsInVzZXJfbmFtZSI6IkFkcnllbGwiLCJ1c2VyX2JpcnRoZGF0ZSI6IlN1biwgMTUgQXVnIDE5OTkgMDA6MDA6MDAgR01UIiwidXNlcl9waG9uZSI6IjAwMDAwMDAwMDAwIiwidXNlcl9jaXR5IjoiQmV0aW0iLCJpc19vd25lciI6dHJ1ZSwiY3JlYXRlZF9hdCI6Ik1vbiwgMTggT2N0IDIwMjEgMTE6MjY6MDUgR01UIn0sIm5iZiI6MTYzNDU2NzUwNSwiZXhwIjoxNjM0NTY4NDA1fQ.ndS_1fJcZuWyfg8o2BGDE2ANf_1NCLb_aXYJxIT8VO8"
      }
+
+
+## 1.4 - Delete user
+
+### Request
+
+`DELETE /users`
+
+    http://localhost:5000/users
+
+    {
+        "id": 1
+    }
+
+### Response
+
+     no body returned for response
+
+
+## 1.5 - update user
+
+### Request
+
+`UPDATE /users`
+
+    http://localhost:5000/users
+
+    {
+        "id": 1
+    }
+
+### Response
+
+     no body returned for response
