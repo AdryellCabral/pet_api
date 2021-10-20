@@ -1,4 +1,4 @@
-from flask import request, jsonify, current_app
+from flask import request, jsonify, current_app, render_template
 from datetime import datetime
 
 import sqlalchemy
@@ -36,9 +36,13 @@ def get_users():
 
     users = User.query.all()
 
-    return {"data":
-        [serializer(user) for user in users]
-    }, 200
+    cities = ['sao paulo', 'curitiba', 'rio de janeiro']
+
+    return render_template('users.html', cities=users)
+
+    # return {"data":
+    #     [serializer(user) for user in users]
+    # }, 200
 
 
 def login_user():
