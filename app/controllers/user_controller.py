@@ -36,9 +36,7 @@ def get_users():
 
     users = User.query.all()
 
-    cities = ['sao paulo', 'curitiba', 'rio de janeiro']
-
-    return render_template('users.html', cities=users)
+    return render_template('users.html', users=users)
 
     # return {"data":
     #     [serializer(user) for user in users]
