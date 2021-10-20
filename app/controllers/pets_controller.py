@@ -23,7 +23,7 @@ def create_type():
         session.add(pet)
         session.commit()
 
-        return jsonify(pet), 201
+        return jsonify(data=pet), 201
     except IntegrityError as e:
         return {"Error": str(e.orig).split("\n")[0]}, 400
     except InvalidNumberPhone as e:
@@ -38,7 +38,7 @@ def get_all():
         if data == []:
             raise NoDataFound
 
-        return jsonify(data)
+        return jsonify(data=data)
     except NoDataFound:
         return jsonify({"message": "No data found."}), 400
 
@@ -56,11 +56,13 @@ def delete_data():
 
         return "", 204
     except KeyError:
-        return {'message': 'chave invalida'}, 404
+        return {'message': 'Invalid key'}, 404
     except NoResultFound:
         return {
             'message': 'No lines were found when one was needed'
             }, 404
+    except IntegrityError as e:
+        return {"Error": str(e.orig).split("\n")[0]}, 400
 
 
 # @jwt_required()
@@ -79,7 +81,7 @@ def patch_data():
 
         return '', 204
     except KeyError:
-        return {'message': 'Invalid'}, 404
+        return {'message': 'Invalid key'}, 404
     except AttributeError:
         return {'message': 'No data found.'}, 404
 
@@ -90,7 +92,7 @@ def select_data():
 
         query = PetsModel.query.filter_by(id=data['id']).one()
 
-        return jsonify(query)
+        return jsonify(data=query)
 
     except NoDataFound:
         return jsonify({"message": "No data found."}), 400

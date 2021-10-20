@@ -25,7 +25,7 @@ def post_pet():
         session.add(pet)
         session.commit()
 
-        return jsonify(pet)
+        return jsonify(data=pet)
     except IntegrityError as e:
         return {"Error": str(e.orig).split("\n")[0]}, 400
 
@@ -38,7 +38,7 @@ def get_all():
         if data == []:
             raise NoDataFound
 
-        return jsonify(data)
+        return jsonify(data=data)
     except NoDataFound:
         return jsonify({"message": "No data found."}), 400
 
@@ -83,7 +83,7 @@ def patch_data():
 
         return '', 204
     except KeyError:
-        return {'message': 'Invalid'}, 404
+        return {'message': 'Invalid key'}, 404
     except AttributeError:
         return {'message': 'No data found.'}, 404
 
@@ -114,7 +114,7 @@ def select_data():
 
         query = AdoptionsModel.query.filter_by(id=data['id']).one()
 
-        return jsonify(query)
+        return jsonify(data=query)
 
     except NoDataFound:
         return jsonify({"message": "No data found."}), 400
