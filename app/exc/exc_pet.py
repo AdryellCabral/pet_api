@@ -1,2 +1,6 @@
 class NoDataFound(Exception):
     ...
+
+
+class InvalidNumberPhone(Exception):
+    ...

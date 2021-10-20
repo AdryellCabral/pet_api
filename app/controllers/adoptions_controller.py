@@ -106,3 +106,15 @@ def adotar_pet():
             return {'Error': 'Este pet ja foi adotado.'}, 400
         elif erro == 'insert or update on table':
             return {'Error': 'Este pet nao existe.'}, 404
+
+            
+def select_data():
+    try:
+        data = request.get_json()
+
+        query = AdoptionsModel.query.filter_by(id=data['id']).one()
+
+        return jsonify(query)
+
+    except NoDataFound:
+        return jsonify({"message": "No data found."}), 400
