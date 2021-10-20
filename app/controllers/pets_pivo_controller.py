@@ -86,3 +86,15 @@ def patch_data():
         return {'message': 'Invalid'}, 404
     except AttributeError:
         return {'message': 'No data found.'}, 404
+
+
+def select_data():
+    try:
+        data = request.get_json()
+
+        query = PetPivoModel.query.filter_by(id=data['id']).one()
+
+        return jsonify(query)
+
+    except NoDataFound:
+        return jsonify({"message": "No data found."}), 400
