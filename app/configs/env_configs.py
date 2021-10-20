@@ -1,7 +1,9 @@
 from dotenv import load_dotenv
 import os
 
+
 load_dotenv()
+
 
 def init_app(app):
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
