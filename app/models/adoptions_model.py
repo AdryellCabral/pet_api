@@ -5,17 +5,24 @@ from sqlalchemy import Column, Integer, DateTime, String
 
 
 @dataclass
-class PetPivoModel(db.Model):
+class AdoptionsModel(db.Model):
     id: int
-    pet_name: str
     pet_info: str
+    owner_info: str
+    pet_name: str
 
-    __tablename__ = "pet_pivo"
+    __tablename__ = "adoptions"
 
     id = Column(Integer, primary_key=True)
-    pet_name = Column(String(60), nullable=False)
+
     created_at = Column(DateTime, nullable=False, default=datetime.today())
 
     pet_info = db.relationship("PetsModel", backref=db.backref("pet",
                                uselist=False))
-    pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False)
+    pet_id = db.Column(db.Integer, db.ForeignKey("pets.id"), nullable=False, unique=True)
+
+    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+
+    owner_info = db.relationship("User", backref=db.backref("user", uselist=False))
+
+    pet_name = db.Column(String(60), nullable=False)

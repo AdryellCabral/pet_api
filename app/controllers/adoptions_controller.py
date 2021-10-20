@@ -1,5 +1,5 @@
 from flask import current_app, jsonify, request
-from app.models.pets_pivo_model import PetPivoModel
+from app.models.adoptions_model import AdoptionsModel
 from app.exc.exc_pet import NoDataFound
 from sqlalchemy.exc import IntegrityError, NoResultFound
 from sqlalchemy.orm.exc import DetachedInstanceError
@@ -20,7 +20,7 @@ def post_pet():
         data.pop("pet_id")
         data["pet_info"] = select_pet
 
-        pet = PetPivoModel(**data)
+        pet = AdoptionsModel(**data)
 
         session.add(pet)
         session.commit()
@@ -33,7 +33,7 @@ def post_pet():
 # @jwt_required()
 def get_all():
     try:
-        data = PetPivoModel.query.all()
+        data = AdoptionsModel.query.all()
 
         if data == []:
             raise NoDataFound
@@ -49,7 +49,7 @@ def delete_data():
         session = current_app.db.session
 
         data = request.get_json()
-        query = PetPivoModel.query.filter_by(id=data['id']).one()
+        query = AdoptionsModel.query.filter_by(id=data['id']).one()
 
         session.delete(query)
         session.commit()
@@ -73,7 +73,7 @@ def patch_data():
         session = current_app.db.session
         data = request.get_json()
 
-        query = PetPivoModel.query.filter_by(id=data['id']).one()
+        query = AdoptionsModel.query.filter_by(id=data['id']).one()
 
         for key, value in data.items():
             setattr(query, key, value)
@@ -88,11 +88,31 @@ def patch_data():
         return {'message': 'No data found.'}, 404
 
 
+def adotar_pet():
+    try:
+        session = current_app.db.session
+
+        data = request.json
+
+        adopted_pet = AdoptionsModel(**data)
+
+        session.add(adopted_pet)
+        session.commit()
+
+        return jsonify(adopted_pet), 201
+    except IntegrityError as e:
+        erro = str(e.orig).split(' "')[0]
+        if erro == 'duplicate key value violates unique constraint':
+            return {'Error': 'Este pet ja foi adotado.'}, 400
+        elif erro == 'insert or update on table':
+            return {'Error': 'Este pet nao existe.'}, 404
+
+            
 def select_data():
     try:
         data = request.get_json()
 
-        query = PetPivoModel.query.filter_by(id=data['id']).one()
+        query = AdoptionsModel.query.filter_by(id=data['id']).one()
 
         return jsonify(data=query)
 
