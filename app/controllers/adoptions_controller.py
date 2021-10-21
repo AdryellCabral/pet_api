@@ -1,39 +1,38 @@
 from flask import current_app, jsonify, request
-from app.models.pets_pivo_model import PetPivoModel
+from app.models.adoptions_model import AdoptionsModel
 from app.exc.exc_pet import NoDataFound
 from sqlalchemy.exc import IntegrityError, NoResultFound
 from sqlalchemy.orm.exc import DetachedInstanceError
-from app.models.pet_model import PetsModel
-
-# from flask_jwt_extended import jwt_required
 
 
-# @jwt_required()
-def post_pet():
+from flask_jwt_extended import jwt_required
+
+
+@jwt_required()
+def adotar_pet():
     try:
         session = current_app.db.session
 
-        data = request.get_json()
+        data = request.json
 
-        select_pet = PetsModel.query.filter_by(id=data["pet_id"]).one()
+        adopted_pet = AdoptionsModel(**data)
 
-        data.pop("pet_id")
-        data["pet_info"] = select_pet
-
-        pet = PetPivoModel(**data)
-
-        session.add(pet)
+        session.add(adopted_pet)
         session.commit()
 
-        return jsonify(data=pet)
+        return jsonify(adopted_pet), 201
     except IntegrityError as e:
-        return {"Error": str(e.orig).split("\n")[0]}, 400
+        erro = str(e.orig).split(' "')[0]
+        if erro == 'duplicate key value violates unique constraint':
+            return {'Error': 'This pet has already been adopted.'}, 400
+        elif erro == 'insert or update on table':
+            return {'Error': 'Pet not registered'}, 404
 
 
-# @jwt_required()
+@jwt_required()
 def get_all():
     try:
-        data = PetPivoModel.query.all()
+        data = AdoptionsModel.query.all()
 
         if data == []:
             raise NoDataFound
@@ -43,13 +42,13 @@ def get_all():
         return jsonify({"message": "No data found."}), 400
 
 
-# @jwt_required()
+@jwt_required()
 def delete_data():
     try:
         session = current_app.db.session
 
         data = request.get_json()
-        query = PetPivoModel.query.filter_by(id=data['id']).one()
+        query = AdoptionsModel.query.filter_by(id=data['id']).one()
 
         session.delete(query)
         session.commit()
@@ -67,13 +66,13 @@ def delete_data():
             }, 404
 
 
-# @jwt_required()
+@jwt_required()
 def patch_data():
     try:
         session = current_app.db.session
         data = request.get_json()
 
-        query = PetPivoModel.query.filter_by(id=data['id']).one()
+        query = AdoptionsModel.query.filter_by(id=data['id']).one()
 
         for key, value in data.items():
             setattr(query, key, value)
@@ -88,11 +87,12 @@ def patch_data():
         return {'message': 'No data found.'}, 404
 
 
+@jwt_required()
 def select_data():
     try:
         data = request.get_json()
 
-        query = PetPivoModel.query.filter_by(id=data['id']).one()
+        query = AdoptionsModel.query.filter_by(id=data['id']).one()
 
         return jsonify(data=query)
 

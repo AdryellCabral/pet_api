@@ -8,5 +8,5 @@ def init_app(app: Flask):
     from app.routes.pets_bp import bp as bp_pet
     app.register_blueprint(bp_pet)
 
-    from .pets_pivo_bp import bp as bp_type_pet
-    app.register_blueprint(bp_type_pet)
+    from .adoptions_bp import bp as bp_adoptions
+    app.register_blueprint(bp_adoptions)

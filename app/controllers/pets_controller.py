@@ -4,10 +4,10 @@ from app.exc.exc_pet import NoDataFound, InvalidNumberPhone
 from sqlalchemy.exc import IntegrityError, NoResultFound
 from re import fullmatch
 
-# from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required
 
 
-# @jwt_required()
+@jwt_required()
 def create_type():
     try:
         session = current_app.db.session
@@ -30,7 +30,7 @@ def create_type():
         return {"Error": str(e)}, 400
 
 
-# @jwt_required()
+@jwt_required()
 def get_all():
     try:
         data = PetsModel.query.all()
@@ -43,7 +43,7 @@ def get_all():
         return jsonify({"message": "No data found."}), 400
 
 
-# @jwt_required()
+@jwt_required()
 def delete_data():
     try:
         session = current_app.db.session
@@ -65,7 +65,7 @@ def delete_data():
         return {"Error": str(e.orig).split("\n")[0]}, 400
 
 
-# @jwt_required()
+@jwt_required()
 def patch_data():
     try:
         session = current_app.db.session
