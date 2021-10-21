@@ -94,7 +94,7 @@ JSON model
 
 `POST /api/users/login`
 
-    http://127.0.0.1:5000/api/users/login
+    https://pettimeapi.herokuapp.com/api/users/login
 
 JSON model
 
