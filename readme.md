@@ -28,7 +28,7 @@ The REST API to the app is described below.
 
 ##
 
-Base URL: https://pettimeapi.herokuapp.com/`
+Base URL: `https://capstone-q3-backup-deploy.herokuapp.com/`
 
 # 1 - USER
 
@@ -38,7 +38,7 @@ Base URL: https://pettimeapi.herokuapp.com/`
 
 `GET /api/users`
 
-    https://pettimeapi.herokuapp.com/api/users
+    https://capstone-q3-backup-deploy.herokuapp.com/api/users
 
 ### Response
 
@@ -63,7 +63,7 @@ Base URL: https://pettimeapi.herokuapp.com/`
 
 `POST /api/users/signup`
 
-    https://pettimeapi.herokuapp.com/api/users/signup
+    https://capstone-q3-backup-deploy.herokuapp.com/api/users/signup
 
 JSON model
 
@@ -94,7 +94,7 @@ JSON model
 
 `POST /api/users/login`
 
-    https://pettimeapi.herokuapp.com/api/users/login
+    https://capstone-q3-backup-deploy.herokuapp.com/api/users/login
 
 JSON model
 
@@ -115,7 +115,7 @@ JSON model
 
 `DELETE /users`
 
-    https://pettimeapi.herokuapp.com/api/users
+    https://capstone-q3-backup-deploy.herokuapp.com/api/users
 
 JSON model
 
@@ -133,7 +133,7 @@ JSON model
 
 `UPDATE /users`
 
-    https://pettimeapi.herokuapp.com/api/users
+    https://capstone-q3-backup-deploy.herokuapp.com/api/users
 
 JSON model
 
@@ -156,7 +156,7 @@ JSON model
 
 `GET /api/pets`
 
-    https://pettimeapi.herokuapp.com/api/pets
+    https://capstone-q3-backup-deploy.herokuapp.com/api/pets
 
 ### Response
 
@@ -181,7 +181,7 @@ JSON model
 
 `POST /api/pets`
 
-    https://pettimeapi.herokuapp.com/api/pets
+    https://capstone-q3-backup-deploy.herokuapp.com/api/pets
 
 ### JSON model
 
@@ -216,7 +216,7 @@ JSON model
 
 `DELETE /api/pets`
 
-    https://pettimeapi.herokuapp.com/api/pets
+    https://capstone-q3-backup-deploy.herokuapp.com/api/pets
 
 ### JSON model
 
@@ -236,7 +236,7 @@ JSON model
 
 ### It is necessary to use the "id" to update the other data that are optional.
 
-    https://pettimeapi.herokuapp.com/api/pets
+    https://capstone-q3-backup-deploy.herokuapp.com/api/pets
 
 ### JSON model
 
@@ -261,7 +261,7 @@ JSON model
 
 `POST /api/petsselect-pet`
 
-    https://pettimeapi.herokuapp.com/api/pets/select-pet
+    https://capstone-q3-backup-deploy.herokuapp.com/api/pets/select-pet
 
 ### JSON model
 
@@ -295,7 +295,7 @@ JSON model
 
 `GET /api/adoptions`
 
-    https://pettimeapi.herokuapp.com/api/adoptions
+    https://capstone-q3-backup-deploy.herokuapp.com/api/adoptions
 
 ### Response
 
@@ -332,7 +332,7 @@ JSON model
 
 `POST /api/adoptions`
 
-    https://pettimeapi.herokuapp.com/api/adoptions
+    https://capstone-q3-backup-deploy.herokuapp.com/api/adoptions
 
 ### JSON model
 
@@ -375,7 +375,7 @@ JSON model
 
 `DELETE /api/adoptions`
 
-    https://pettimeapi.herokuapp.com/api/adoptions
+    https://capstone-q3-backup-deploy.herokuapp.com/api/adoptions
 
 ### JSON model
 
@@ -393,7 +393,7 @@ JSON model
 
 `UPDATE /api/adoptions`
 
-    https://pettimeapi.herokuapp.com/api/adoptions
+    https://capstone-q3-backup-deploy.herokuapp.com/api/adoptions
 
 ### JSON model
 
@@ -412,7 +412,7 @@ JSON model
 
 `POST /pet/list/select`
 
-    https://pettimeapi.herokuapp.com/api/adoptions/select-id
+    https://capstone-q3-backup-deploy.herokuapp.com/api/adoptions/select-id
 
 ### JSON model
 
