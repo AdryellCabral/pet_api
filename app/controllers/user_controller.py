@@ -9,23 +9,46 @@ from flask_jwt_extended import create_access_token, jwt_required
 
 def cadastrar_user():
     try:
-        data = request.json
 
-        user = User(**data)
+        if request.method == 'GET':
+            return render_template('cadastro.html')
 
-        db.session.add(user)
-        db.session.commit()
+        if request.method == 'POST':
+            
+            data = request.form
 
-        return jsonify(user), 201
+            new_user = {
+                "user_name": data["name"],
+                "user_birthdate": data["birthdate"],
+                "user_cpf": data["cpf"],
+                "user_city": data["cidade"],
+                "user_phone": data["telefone"],
+                "password": data["senha"]
+            }
+
+            user = User(**new_user)
+            db.session.add(user)
+            db.session.commit()
+
+            if data:
+                return render_template('login.html')
+
+            return 'OLa'
+
+        # return jsonify(user), 201
     except sqlalchemy.exc.IntegrityError:
         return {"msg": "Check the user data and try again. Read the documentation for more information."}, 400
 
 
-@jwt_required()
+# @jwt_required()
 def get_users():
-    users = User.query.all()
+    # users = User.query.all()
 
-    return render_template('users.html', users=users)
+    users = jsonify(json_list = User.query.all())
+
+    print(users)
+
+    return render_template('users.html')
 
     # return {"data":
     #     [serializer(user) for user in users]
@@ -36,18 +59,21 @@ def login_user():
     data = request.json
 
     try:
-        user = User.query.filter_by(user_cpf=data.get("user_cpf")).first()
+        if request.method == 'GET':
+            return render_template('login.html')
 
-        if user.check_password(data.get('password')):
-            access_token = create_access_token(user)
-            return {"access_token": access_token}, 200
+        # user = User.query.filter_by(user_cpf=data.get("user_cpf")).first()
 
-        return {"msg": "Bad username or password."}, 401
+        # if user.check_password(data.get('password')):
+        #     access_token = create_access_token(user)
+        #     return {"access_token": access_token}, 200
+
+        # return {"msg": "Bad username or password."}, 401
     except AttributeError:
         return {"msg": "User with this cpf not found!"}, 404
 
 
-@jwt_required()
+# @jwt_required()
 def delete_user():
     try:
         data = request.get_json()
@@ -62,7 +88,7 @@ def delete_user():
         return {'message': 'Invalid key'}, 404
 
 
-@jwt_required()
+# @jwt_required()
 def update_user():
     try:
         session = current_app.db.session
