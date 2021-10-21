@@ -138,7 +138,8 @@ JSON model
 JSON model
 
     {
-        "id": 1
+        "id": 1,
+        "name": "name editado"
     }
 
 ### Response
