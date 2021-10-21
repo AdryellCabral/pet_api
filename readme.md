@@ -38,7 +38,7 @@ Base URL: `url do heroku aqui`
 
 `GET /api/users`
 
-    http://localhost:5000/api/users
+    https://pettimeapi.herokuapp.com/api/users
 
 ### Response
 
@@ -63,7 +63,7 @@ Base URL: `url do heroku aqui`
 
 `POST /api/users/signup`
 
-    http://localhost:5000/api/users/signup
+    https://pettimeapi.herokuapp.com/api/users/signup
 
 JSON model
 
@@ -115,7 +115,7 @@ JSON model
 
 `DELETE /users`
 
-    http://localhost:5000/api/users
+    https://pettimeapi.herokuapp.com/api/users
 
 JSON model
 
@@ -133,7 +133,7 @@ JSON model
 
 `UPDATE /users`
 
-    http://localhost:5000/api/users
+    https://pettimeapi.herokuapp.com/api/users
 
 JSON model
 
@@ -156,7 +156,7 @@ JSON model
 
 `GET /api/pets`
 
-    http://localhost:5000/api/pets
+    https://pettimeapi.herokuapp.com/api/pets
 
 ### Response
 
@@ -181,7 +181,7 @@ JSON model
 
 `POST /api/pets`
 
-    http://localhost:5000/api/pets
+    https://pettimeapi.herokuapp.com/api/pets
 
 ### JSON model
 
@@ -216,7 +216,7 @@ JSON model
 
 `DELETE /api/pets`
 
-    http://localhost:5000/api/pets
+    https://pettimeapi.herokuapp.com/api/pets
 
 ### JSON model
 
@@ -236,7 +236,7 @@ JSON model
 
 ### It is necessary to use the "id" to update the other data that are optional.
 
-    http://localhost:5000/api/pets
+    https://pettimeapi.herokuapp.com/api/pets
 
 ### JSON model
 
@@ -261,7 +261,7 @@ JSON model
 
 `POST /api/petsselect-pet`
 
-    http://localhost:5000/api/pets/select-pet
+    https://pettimeapi.herokuapp.com/api/pets/select-pet
 
 ### JSON model
 
@@ -295,7 +295,7 @@ JSON model
 
 `GET /api/adoptions`
 
-    http://localhost:5000/api/adoptions
+    https://pettimeapi.herokuapp.com/api/adoptions
 
 ### Response
 
@@ -332,7 +332,7 @@ JSON model
 
 `POST /api/adoptions`
 
-    http://localhost:5000/api/adoptions
+    https://pettimeapi.herokuapp.com/api/adoptions
 
 ### JSON model
 
@@ -375,7 +375,7 @@ JSON model
 
 `DELETE /api/adoptions`
 
-    http://localhost:5000/api/adoptions
+    https://pettimeapi.herokuapp.com/api/adoptions
 
 ### JSON model
 
@@ -393,7 +393,7 @@ JSON model
 
 `UPDATE /api/adoptions`
 
-    http://localhost:5000/api/adoptions
+    https://pettimeapi.herokuapp.com/api/adoptions
 
 ### JSON model
 
@@ -412,7 +412,7 @@ JSON model
 
 `POST /pet/list/select`
 
-    http://localhost:5000/api/adoptions/select-id
+    https://pettimeapi.herokuapp.com/api/adoptions/select-id
 
 ### JSON model
 
