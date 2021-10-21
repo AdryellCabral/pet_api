@@ -28,7 +28,7 @@ The REST API to the app is described below.
 
 ##
 
-Base URL: `url do heroku aqui`
+Base URL: https://pettimeapi.herokuapp.com/`
 
 # 1 - USER
 
