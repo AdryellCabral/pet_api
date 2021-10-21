@@ -1,4 +1,6 @@
-from flask import request, jsonify, current_app
+from flask import request, jsonify, current_app, render_template
+from datetime import datetime
+
 import sqlalchemy
 from app.models.user_model import User
 from app.configs.database import db
@@ -23,7 +25,11 @@ def cadastrar_user():
 def get_users():
     users = User.query.all()
 
-    return jsonify(users), 200
+    return render_template('users.html', users=users)
+
+    # return {"data":
+    #     [serializer(user) for user in users]
+    # }, 200
 
 
 def login_user():
